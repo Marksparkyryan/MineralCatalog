@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     def populate_db(apps, schema_editor):
         #Mineral = apps.get_model('minerals', 'Mineral')
-        with open(os.path.join(BASE_DIR, "static/minerals/json/minerals.json")) as jsonfile:
+        with open(os.path.join(BASE_DIR, "static/minerals/json/minerals.json"), encoding="utf-8") as jsonfile:
             json_reader = json.load(jsonfile)
             for mineral in json_reader:
                 try:
@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                         Mineral.objects.create(**mineral)
                 except IntegrityError:
                     print("integrity error")
+                    print(mineral)
 
 
     dependencies = [
