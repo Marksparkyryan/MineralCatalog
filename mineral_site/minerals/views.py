@@ -10,6 +10,16 @@ def mineral_list(request):
 
 def mineral_detail(request, pk):
     mineral = get_object_or_404(Mineral, pk=pk)
-    return render(request, "minerals/mineral_detail.html", {"mineral" : mineral})
+    fields = {}
+    for field in mineral._meta.fields:
+        print(field.name, field.value_to_string(mineral))
+        fields.update(
+            {field.name : field.value_to_string(mineral)},
+        )
+    context = {
+        "mineral" : mineral,
+        "fields" : fields,
+    }
+    return render(request, "minerals/mineral_detail.html", context)
 
     

@@ -10,15 +10,31 @@ class Migration(migrations.Migration):
 
     def populate_db(apps, schema_editor):
         #Mineral = apps.get_model('minerals', 'Mineral')
-        with open(os.path.join(BASE_DIR, "static/minerals/json/minerals.json"), encoding="utf-8") as jsonfile:
+        with open(os.path.join(BASE_DIR, "static/minerals/json/minerals.json"), 
+        encoding="utf-8") as jsonfile:
             json_reader = json.load(jsonfile)
+            json_length = len(json_reader)
+            successful = 0
+            skipped = 0
             for mineral in json_reader:
+                mineral_copy = mineral.copy()
+                for key, value in mineral_copy.items():
+                    if value=="":
+                        del mineral[key]   
                 try:
                     with transaction.atomic():
                         Mineral.objects.create(**mineral)
+                        successful += 1
                 except IntegrityError:
-                    print("integrity error")
-                    print(mineral)
+                    skipped += 1
+
+        failed = json_length - (successful + skipped) 
+        print("\n")
+        print("\tPopulating database with minerals.json...")
+        print("\tsuccess: ", successful)
+        print("\tskipped: ", skipped,)
+        print("\tfailed: ", failed)
+        print("\n")
 
 
     dependencies = [
