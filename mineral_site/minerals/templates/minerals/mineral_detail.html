@@ -1,5 +1,7 @@
 {% extends "layout.html" %}
 {% load static %}
+{% load mineral_extras %}
+
 
 
 
@@ -15,7 +17,7 @@
         </div>
         <div class="mineral__table-container">
             <table class="mineral__table">
-            {% for key, value in fields.items %}
+            {% for key, value in fields.items|important_top %}
             {% if value %}
             {% if key != "id" %}
             <tr>
@@ -29,4 +31,5 @@
         </div>
         </div>
         </div>
+        
 {% endblock %}

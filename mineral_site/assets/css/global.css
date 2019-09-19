@@ -35,7 +35,7 @@ html { font-size: 62.5%; }
 body { background-color: #CAE5D2; font-size: 1.5em; line-height: 1.6; font-weight: 400; font-family: "Cousine"; color: #666; }
 
 .bounds { max-width: 800px; margin: 0 auto; padding: 50px 0 150px; overflow: hidden; }
-.bounds--small { max-width: 600px; padding: 50px 10px 150px; }
+.bounds--small { max-width: 600px; padding: 0px 10px 150px; }
 
 .grid, .grid-5, .grid-10, .grid-15, .grid-20, .grid-25, .grid-30, .grid-33, .grid-35, .grid-40, .grid-45, .grid-50, .grid-55, .grid-60, .grid-65, .grid-66, .grid-70, .grid-75, .grid-80, .grid-90, .grid-95, .grid-100 { float: left; box-sizing: border-box; position: relative; }
 .grid-5 { width: 5%; padding: 0 15px; }

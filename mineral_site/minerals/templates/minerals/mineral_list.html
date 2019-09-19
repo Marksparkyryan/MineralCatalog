@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-{% load mineral_extras %}
 
 {% block title %}Macky's Minerals: A magnificant catalog of minerals{% endblock %}
 
@@ -17,11 +16,6 @@
         </ul>
     </div>
 </div>
-<div class="minerals__random">
-    
-    <a class="minerals__anchor" 
-    href="{% url 'minerals:detail' pk=minerals|random_mineral %}">Show random mineral</a>
-    
-</div>
+
 
 {% endblock %}
