@@ -1,21 +1,32 @@
 {% extends "layout.html" %}
+{% load mineral_extras %}
+{% load static %}
 
 {% block title %}Macky's Minerals: A magnificant catalog of minerals{% endblock %}
 
-
 {% block content %}
-
-    <div class="grid-100">
-        <ul class="minerals__container">
-            {% for mineral in minerals %}
-            <li class="minerals__item">
-                <a class="minerals__anchor" 
-                href="{% url 'minerals:detail' pk=mineral.pk %}">{{ mineral.name }}</a>
-            </li>
+<div class="grid-100">
+    <div class="pagin-list">
+            {% for letter in pagin_list %}
+            <a href=#{{ letter }}>{{ letter }}</a>
             {% endfor %}
-        </ul>
     </div>
 </div>
+<div class="grid-100">
+    <ul class="minerals__container">
+        {% for mineral in minerals %}
+            <li class="minerals__item">
+                <a class="minerals__anchor"
+                id="{{ mineral|first_letter }}" 
+                href="{% url 'minerals:detail' pk=mineral.pk %}">{{ mineral.name|title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="back_to_top" id="back_to_top" style="display:none">
+    <a href="#"><img src="{% static 'images/icons8-up-48.png' %}" alt="Up"></a>
+</div>
 
-
+<script src="{% static 'javascript/main.js'%}"></script>
 {% endblock %}

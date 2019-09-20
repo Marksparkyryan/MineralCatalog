@@ -2,34 +2,29 @@
 {% load static %}
 {% load mineral_extras %}
 
-
-
-
 {% block content %}
 <div class="bounds bounds--small">
-<div class="grid-100 mineral__container">
-        <h1 class="mineral__name">{{ mineral.name }}</h1>
-        <div class="mineral__image-bg">
-            
+    <div class="grid-100 mineral__container">
+        <h1 class="mineral__name">{{ mineral.name|title }}</h1>
+        <div class="mineral__image-bg">           
             <img class="mineral__image" 
             src="{% static 'minerals/images/' %}{{ mineral.image_filename }}">
             <p class="mineral__caption">{{ mineral.image_caption }}</p>
         </div>
         <div class="mineral__table-container">
             <table class="mineral__table">
-            {% for key, value in fields.items|important_top %}
-            {% if value %}
-            {% if key != "id" %}
-            <tr>
-                <td class="mineral__category">{{ key|title }}</td>
-                <td>{{ value|safe }}</td>
-            </tr>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
+                {% for key, value in fields.items|important_top %}
+                {% if value %}
+                {% if key != "id" %}
+                    <tr>
+                        <td class="mineral__category">{{ key|title }}</td>
+                        <td>{{ value|safe }}</td>
+                    </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
             </table>
         </div>
         </div>
-        </div>
-        
+        </div>      
 {% endblock %}

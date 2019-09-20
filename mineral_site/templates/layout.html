@@ -28,14 +28,14 @@
         </div>
  {% block content %}
  {% endblock %}
-    </div>
-    <div class="minerals__random">
-        {% if mineral %}
+</div>
+<div class="minerals__random">
+    {% if mineral %}
         <a class="minerals__anchor" 
                 href="{% url 'minerals:list' %}">Back</a>
-        {% endif %}
+    {% endif %}
         <a class="minerals__anchor" 
                 href="{% url 'minerals:detail' pk=minerals|random_mineral %}">Show random mineral</a>
-    </div>
+</div>
 </body>
 </html>

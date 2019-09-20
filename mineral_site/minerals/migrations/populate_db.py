@@ -8,9 +8,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Migration(migrations.Migration):
+    """custom data migration from minerals.json"""
 
     def populate_db(apps, schema_editor):
-        #don't populate database if testing
+        """fetches and reads minerals.json if <test> has not been passed
+        into terminal. Json object are then loaded into the database.
+        """
         if "test" not in sys.argv:
             Mineral = apps.get_model('minerals', 'Mineral')
             with open(os.path.join(BASE_DIR, "static/minerals/json/minerals.json"), 

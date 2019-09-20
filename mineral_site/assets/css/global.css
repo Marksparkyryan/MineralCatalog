@@ -1,4 +1,4 @@
-html { font-family: sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
+html { font-family: sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body { margin: 0; }
 
@@ -202,3 +202,33 @@ table, p, ul { margin-bottom: 2.5rem; }
 .mineral__table-container { padding: 5px 30px 0; }
 .mineral__category { font-weight: bold; width: 40%; }
 .mineral__formula { font-size: 12px; }
+
+.pagin-list { margin: 15px; text-align: center;}
+.pagin-list a { border: solid 2px #DCF5F2; border-radius: 50%; color: #384033; display: inline-block; font-size: 14px; text-align: center; padding: 8px 15px 8px 15px; margin: 5px;}
+.pagin-list a:hover { background: #DCF5F2; font-weight: bold; border: solid 2px #DCF5F2; border-radius: 50%; color: #384033; display: inline-block; font-size: 14px; text-align: center; padding: 8px 15px 8px 15px; margin: 5px;}
+
+.back_to_top a { 
+  position: fixed; 
+  top: 15px; 
+  right: 15px; 
+  z-index: 99;
+  background: #384033;
+  border-radius: 50%;
+  padding: 10px 10px 0px 10px;
+  text-align: center;
+
+}
+
+@media (max-width: 800px) {
+  .back_to_top a {
+    box-shadow: 0 0 25px 5px white;
+  }
+}
+
+.back_to_top a:hover { 
+  position: fixed; 
+  top: 15px; 
+  right: 15px; 
+  z-index: 99;
+  animation:  duration timing-function delay iteration-count direction fill-mode;
+}

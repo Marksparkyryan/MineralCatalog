@@ -2,10 +2,11 @@ from django.db import models
 
 
 class Mineral(models.Model):
+    """mineral model describing attributes of each mineral instance"""
     name = models.CharField(max_length=256, unique=True)
     image_filename = models.CharField(max_length=256)
     image_caption = models.CharField(max_length=256)
-    category = models.CharField(max_length=256) 
+    category = models.CharField(max_length=256)
     formula = models.CharField(max_length=256)
     strunz_classification = models.CharField(max_length=256)
     crystal_system = models.CharField(max_length=256)
