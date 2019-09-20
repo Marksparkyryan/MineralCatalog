@@ -47,6 +47,6 @@ If deploying, the secret key should be replaced in settings.py - ideally inside 
 
 # credits
 
-https://www.w3schools.com/howto/howto_js_scroll_to_top.asp for the appear/dissappear feature on the back-to-top arrow on the mineral list page
+https://www.w3schools.com/howto/howto_js_scroll_to_top.asp for the appear/disappear feature on the back-to-top arrow on the mineral list page
 
 Treehouse Techdegree Project 6
