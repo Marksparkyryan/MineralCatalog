@@ -23,11 +23,8 @@ def mineral_detail(request, pk):
     """
     mineral = get_object_or_404(Mineral, pk=pk)
     minerals = Mineral.objects.all()
-    fields = {}
-    for field in mineral._meta.fields[4:]:
-        fields.update(
-            {field.name.replace("_", " "): field.value_to_string(mineral)},
-        )
+    fields = mineral.fields_lower
+
     context = {
         "mineral": mineral,
         "fields": fields,

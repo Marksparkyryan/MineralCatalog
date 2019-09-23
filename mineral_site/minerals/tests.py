@@ -10,6 +10,8 @@ from .templatetags.mineral_extras import random_mineral
 class MineralViewsTest(TestCase):
     """Unit tests for mineral list view and mineral detail view"""
 
+    maxDiff = None
+
     def setUp(self):
         self.mineral1 = Mineral.objects.create(
             name="Abelsonite",
@@ -57,10 +59,10 @@ class MineralViewsTest(TestCase):
             group="Arsenates",
         )
         self.display_fields = ["category", "formula", "strunz classification",
-                               "color", "crystal system", "unit cell", 
-                               "crystal symmetry", "cleavage", 
-                               "mohs scale hardness", "luster", "streak", 
-                               "diaphaneity", "optical properties", 
+                               "color", "crystal system", "unit cell",
+                               "crystal symmetry", "cleavage",
+                               "mohs scale hardness", "luster", "streak",
+                               "diaphaneity", "optical properties",
                                "refractive index", "crystal habit",
                                "specific gravity", "group",
                                ]
@@ -108,31 +110,23 @@ class MineralViewsTest(TestCase):
         self.assertIsInstance(resp.context['mineral'], Mineral)
 
     def test_all_mineral_attributes_in_context(self):
-        """make sure all attributes of passed in mineral are displayed"""
+        """make sure all attributes from model dict is equal to attributes 
+        in context dict
+        """
         resp = self.client.get(reverse('minerals:detail',
                                        kwargs={"pk": self.mineral1.pk}))
-        mineral_dict = {
-            field.name.replace("_", " "): field.value_to_string(self.mineral1)
-            for field in self.mineral1._meta.fields[4:]}
-        self.assertDictEqual(resp.context['fields'], mineral_dict)
+        self.assertDictEqual(self.mineral1.fields_lower,
+                             resp.context['fields'])
 
-    def test_available_mineral_attributes_in_html_no_underscore(self):
-        """make sure mineral attributes don't have underscores in them"""
+    def test_available_mineral_attributes_in_html(self):
+        """make sure mineral attributes with values are displayed in 
+        detail view
+        """
         resp = self.client.get(reverse('minerals:detail',
                                        kwargs={"pk": self.mineral1.pk}))
-        for field in self.mineral1._meta.fields:
-            if field.name.replace("_", " ") in self.display_fields:
-                if field.value_to_string(self.mineral1):
-                    cap_field = field.name.replace("_", " ")
-                    cap_field = [x.capitalize() for x in cap_field.split()]
-                    cap_field = " ".join(cap_field).strip()
-                    pattern = re.compile(
-                        r'(>' + r'{}'.format(cap_field) + r'<)'
-                    )
-                    self.assertRegex(
-                        resp.content.decode('utf-8'),
-                        pattern,
-                    )
+        for key, value in self.mineral1.fields_capitalized.items():
+            if key.lower() not in ["id", "name", "image filename", "image caption"]:
+                self.assertIn(key, resp.content.decode('utf-8'))
 
     def test_random_mineral_filter(self):
         """make sure random mineral logic returns a good page"""

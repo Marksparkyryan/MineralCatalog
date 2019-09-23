@@ -28,3 +28,15 @@ def important_top(fields):
 def first_letter(mineral):
     """returns first letter of passed in mineral name as lowercase"""
     return mineral.name[0].lower()
+
+
+@register.filter(name="display_fields")
+def display_fields(fields):
+    """returns only fields that are meant to be displayed in text in 
+    detail
+    """
+    display_fields = {}
+    for key, value in fields:
+        if key not in ["id", "name", "image filename", "image caption"]:
+            display_fields.update({key: value})
+    return display_fields.items()
