@@ -31,8 +31,9 @@ class Mineral(models.Model):
     @property
     def fields_lower(self):
         """retrieve all fields on instance, strip out underscores in 
-        field name, then return a list of all these cleaned field names
-        """
+        field name (meta fields have underscores), then return a list of 
+        all these cleaned field names
+        """  
         cleaned_fields = {}
         for field in self._meta.fields:
             if field.value_to_string(self):
